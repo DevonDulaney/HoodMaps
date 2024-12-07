@@ -3,14 +3,17 @@
     padding: 0;
     margin: 0;
 }
+
 html, body {
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     width: 100%;
     height: 100%;
 }
+
 h1 {
     text-align: center;
 }
+
 .map {
     background-image: url('../assets/hoodmaps-amsterdam.png');
     background-position: center center;
@@ -20,41 +23,57 @@ h1 {
     position: relative;
     cursor: url(../assets/circle.png) 32 32, auto;
 }
+
 .color-picker {
-    width: 100vw;
-    position: absolute;
-    z-index: 2;
+    position: fixed; /* Changed to fixed to ensure it stays visible */
+    top: 10px; /* Positioned above the map */
+    left: 10px;
+    z-index: 1100; /* Increased to ensure it is above the map elements */
+    background-color: rgba(255, 255, 255, 0.9); /* Added background for better visibility */
+    padding: 10px; /* Added padding for a cleaner layout */
+    border-radius: 5px; /* Rounded corners for aesthetics */
+    width: auto; /* Set to auto so that it doesn't cover the entire viewport */
 }
+
 .color-picker div {
     padding: 0.8em;
     text-align: center;
-    width: 20vw;
-    float: left;
+    width: auto; /* Changed from 20vw to auto for better alignment */
+    margin-right: 10px; /* Added margin to create spacing between color divs */
     cursor: pointer;
+    display: inline-block; /* Changed to inline-block to avoid float-related issues */
 }
+
 .color-picker div.active {
     font-weight: bold;
-    height: 3.5em;
+    height: auto; /* Removed fixed height for flexibility */
     opacity: 1;
+    border: 2px solid black; /* Added border to visually indicate the active color */
 }
+
 .color-picker div span {
     color: #fff;
     font-size: 1em;
     text-shadow: 1px 1px 1px #000;
     display: block;
 }
+
 .color-picker .red {
     background-color: #FF4742;
 }
+
 .color-picker .yellow {
     background-color: #FFC924;
 }
+
 .color-picker .blue {
     background-color: #42A5FF;
 }
+
 .color-picker .green {
     background-color: #2BDE73;
 }
+
 .color-picker .black {
     background-color: #999999;
 }

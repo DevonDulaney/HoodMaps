@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title></title>
+        <title>Leaflet Canvas Integration</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- jQuery library -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        
+        <!-- Custom CSS -->
         <link href="css/style.css" rel="stylesheet">
+        
+        <!-- Leaflet CSS & JS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" /> 
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
     <body>
+        <!-- Color Picker Container -->
         <div class="color-picker">
+            <!-- Red Color Option -->
             <div class="red" data-color="#FF4742">
                 <span>Tourist</span>
             </div>
+            <!-- Yellow Color Option -->
             <div class="yellow" data-color="#FFC924">
                 <span>Hipster</span>
             </div>
+            <!-- Blue Color Option -->
             <div class="blue" data-color="#42A5FF">
                 <span>Corporate</span>
             </div>
+            <!-- Green Color Option -->
             <div class="green" data-color="#2BDE73">
                 <span>Nature</span>
             </div>
+            <!-- Black Color Option -->
             <div class="black" data-color="#999999">
                 <span>Bad</span>
             </div>
         </div>
-        <canvas class="map" id="map"></canvas>
-
+        
+        <!-- Canvas for Drawing on the Map -->
+        <div id="mapid" style="width: 100%; height: 100vh;"></div>
+        <!-- Canvas for Drawing on the Map -->
+        <canvas class="map-overlay" id="map-overlay"></canvas>
+        
+        <!-- Button to Exit Painting Mode and Enable Map Dragging -->
+        <button id="exitPaintingModeButton" style="position: fixed; top: 70px; left: 10px; z-index: 1100; padding: 10px; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; cursor: pointer;">Exit Painting Mode</button>
+        
+        <!-- Custom JavaScript File -->
         <script src="js/js.js"></script>
+        
+        <script src="js/map-initializer.js"></script>
     </body>
 </html>
