@@ -5,10 +5,10 @@ $(function() {
     var ctx = canvas.getContext('2d');
 
     var stab = Number($('.color-picker').height());
-    
+
     $('#map').css('top', stab);
 
-    $(resizeCanvas());
+    resizeCanvas(); // Call resizeCanvas directly
 
     ctx.fillStyle = "blue";
     ctx.globalAlpha = 0.05;
@@ -21,39 +21,44 @@ $(function() {
         canvas.height = window.innerHeight - stab;
     }
 
+    // Declare session variable at the top so it's accessible globally
+    var session;
+
     if (!localStorage.getItem('session')) {
-        let session = {
-        'points': [],
-        'state': true,
-        'item': 0
+        session = {
+            'points': [],
+            'state': true,
+            'item': 0
         };
     } else {
         session = JSON.parse(localStorage.getItem('session'));
         unwrap(session);
     }
+
     var i = session.item;
 
-    $('.map').bind('mousedown', function() {
+    $('#map').bind('mousedown', function() {
         mouseIsDown = true;
     });
-    $('.map').bind('mousemove', function(e) {
+    $('#map').bind('mousemove', function(e) {
         if (!mouseIsDown) return;
+
         var offsetX = $(this).offset().left;
         var offsetY = $(this).offset().top;
         var x = e.pageX - offsetX;
         var y = e.pageY - offsetY;
 
         session.item = i;
-        session.points.push({'color': ctx.fillStyle, 'x': x, 'y': y});
+        session.points.push({ 'color': ctx.fillStyle, 'x': x, 'y': y });
         i++;
 
         draw(ctx.fillStyle, x, y);
-
     });
-    $('.map').bind('mouseup', function(e) {
+    $('#map').bind('mouseup', function(e) {
         mouseIsDown = false;
         localStorage.setItem('session', JSON.stringify(session));
     });
+
     $('.color-picker div').bind('click', function() {
         ctx.fillStyle = $(this).data('color');
         $('.color-picker div').removeClass('active');
@@ -69,9 +74,8 @@ $(function() {
     function draw(color, x, y) {
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.arc(x, y, 30, 0, 2*Math.PI);
+        ctx.arc(x, y, 30, 0, 2 * Math.PI);
         ctx.fill();
     }
-    
-});
 
+});
